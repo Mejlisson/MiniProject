@@ -1,15 +1,13 @@
-import Search from './components/Search/search';
-import './App.css'
+import "./App.css";
+import RandomBooksComponent from "./components/randomBooks/randomBooks";
+
 
 function App() {
-
   return (
     <>
-    <Search/>
-   
-    
+     <RandomBooksComponent />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
