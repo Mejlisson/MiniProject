@@ -1,14 +1,12 @@
-
+import Search from './components/Search/search';
 import './App.css'
 
 function App() {
 
   return (
     <>
-    <Nav/>
     <Search/>
-    <Books/>
-    <Footer/>
+   
     
     </>
   )
