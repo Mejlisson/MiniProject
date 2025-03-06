@@ -5,6 +5,10 @@ function App() {
 
   return (
     <>
+    <Nav/>
+    <Search/>
+    <Books/>
+    <Footer/>
     
     </>
   )
