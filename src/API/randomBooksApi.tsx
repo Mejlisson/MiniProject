@@ -1,5 +1,5 @@
 export const fetchRandomBooks = async () => {
-  const url = `https://openlibrary.org/subjects/fantasy.json?limit=100`;
+  const url = `https://openlibrary.org/subjects/fantasy.json?limit=50`;
   const response = await fetch(url);
   const data = await response.json();
 
