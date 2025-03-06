@@ -11,7 +11,7 @@ export type Book = {
     title: string;
     number_of_pages?: number;
     review?: Review;
-    img_url?: string;
+    coverUrl?: string;
   };
   
   export type Author = {
@@ -25,6 +25,7 @@ export type Book = {
     source_records: string[];
     key: string;
     fuller_name: string;
-    img_url?: string;
+    coverUrl?: string;
   };
   
+ 
