@@ -28,4 +28,17 @@ export type Book = {
     coverUrl?: string;
   };
   
+  export type ApiResponse<T> = {
+    data: T | null;
+    loading: boolean;
+    error: Error | null;
+  };
+  
+  export type SearchParams = {
+    q?: string;
+    title?: string;
+    author?: string;
+    sort?: string;
+    [key: string]: string | undefined;
+  };
  
