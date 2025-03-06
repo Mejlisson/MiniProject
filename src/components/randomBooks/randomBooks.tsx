@@ -1,29 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { fetchRandomBooks } from "../../API/randomBooksApi";
+import React from "react";
+import useFetchBooks from "../../Hooks/useFetchBooksEffect";
 
 const RandomBooksComponent: React.FC = () => {
-  const [books, setBooks] = useState<
-    { title: string; coverUrl: string | null }[]
-  >([]);
-  // state loading
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchBooks = async () => {
-      setLoading(true);
-      const books = await fetchRandomBooks();
-      setBooks(books);
-      setLoading(false);
-      console.log("Number of books:", books.length);
-    };
-
-    fetchBooks();
-  }, []);
+  const { books, loading } = useFetchBooks();
 
   return (
     <div className="p-4 flex justify-center">
       {loading ? (
-        <div>Loading...</div>
+        <div>
+          <img src="/giphy (1).gif" alt="Loading" className="mx-auto" />
+        </div>
       ) : (
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center space-x-30 justify-center pl-32">
           {books.map((book, index) => (
