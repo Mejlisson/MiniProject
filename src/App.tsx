@@ -1,17 +1,15 @@
-
-import './App.css'
+import "./App.css";
+import RandomBooksComponent from "./components/randomBooks/randomBooks";
 
 function App() {
-
   return (
     <>
-    <Nav/>
-    <Search/>
-    <Books/>
-    <Footer/>
-    
+      {/* <Nav/>
+    <Search/> */}
+      <RandomBooksComponent />
+      {/* <Footer/> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
