@@ -74,7 +74,9 @@ const searchBooks = async () => {
       {/*sökresultat */}
       <div className="mt-6 w-full max-w-2xl">
         {loading ? (
-          <p className="text-center">Loading...</p>
+          <div className="flex justify-center items-center">
+              <p className="text-green-700 animate-pulse">Loading...</p>
+        </div>
         ) : books.length > 0 ? (
           <ul className="grid grid-cols-4 sm:grid-cols-4 gap-6 gap-x-25">
             {books.map((book: Book, index) => (
