@@ -1,13 +1,19 @@
 import "./App.css";
-import RandomBooksComponent from "./components/randomBooks/randomBooks";
+import CombinedSearch from "./components/Search/CombinedSearch";
 
 
 function App() {
   return (
     <>
-     <RandomBooksComponent />
+    <CombinedSearch/>
+   
     </>
   );
 }
 
 export default App;
+
+
+/* 
+ 
+*/
