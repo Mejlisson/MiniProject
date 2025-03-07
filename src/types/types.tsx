@@ -11,7 +11,7 @@ export type Book = {
   title: string;
   number_of_pages?: number;
   review?: Review;
-  cover_id?: string;
+  cover_i: string;
   coverUrl: string;
 };
 

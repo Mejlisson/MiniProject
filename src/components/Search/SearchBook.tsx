@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Book } from "../../API/types";
+import { Book } from "../../types/types";
 
 interface BookSearchProps {
   // En callback-funktion för att kolla sökstatus
@@ -40,7 +40,7 @@ export default function BookSearch({ onSearch }: BookSearchProps) {
         setBooks(
           data.docs.map((book: Book) => ({
             title: book.title,
-            cover_i: book.cover_id,
+            cover_i: book.cover_i,
           })),
         );
       }
@@ -91,7 +91,7 @@ export default function BookSearch({ onSearch }: BookSearchProps) {
         {loading && <div>Loading...</div>}
         {books.length > 0 ? (
           <ul className="grid grid-cols-4 sm:grid-cols-4 gap-6 gap-x-25">
-            {books.map((book: any, index) => (
+            {books.map((book: Book, index) => (
               <li
                 key={index}
                 className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-[0px_0px_4px_3px_rgba(195,186,171,0.3)]"

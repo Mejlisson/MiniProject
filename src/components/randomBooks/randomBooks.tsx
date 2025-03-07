@@ -1,5 +1,6 @@
 import React from "react";
 import useFetchBooks from "../../Hooks/useFetchBooksEffect";
+import { Book } from "../../types/types";
 
 const RandomBooksComponent: React.FC = () => {
   const { books, loading } = useFetchBooks();
@@ -7,10 +8,14 @@ const RandomBooksComponent: React.FC = () => {
   return (
     <div className="p-4 flex justify-center">
       {loading ? (
-         <div className="flex justify-center items-center">
-         <img src="/frog(2).gif" alt="Loading animation" className="w-50 h-50 mb-2" />
-         <p className="text-green-700 animate-pulse ">Loading...</p>
-         </div>
+        <div className="flex justify-center items-center">
+          <img
+            src="/frog(2).gif"
+            alt="Loading animation"
+            className="w-50 h-50 mb-2"
+          />
+          <p className="text-green-700 animate-pulse ">Loading...</p>
+        </div>
       ) : (
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-center space-x-30 justify-center pl-32">
           {books.map((book, index) => (
