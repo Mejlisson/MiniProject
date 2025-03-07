@@ -5,7 +5,6 @@ interface Book {
   title: string;
   cover_i?: number;
 }
-
 interface BookSearchProps{ //En callback-funktion för att kolla sökstatus
   onSearch: (searching: boolean) => void;
 }
@@ -31,8 +30,8 @@ export default function BookSearch({ onSearch }: BookSearchProps) {
     onSearch(true);
   };
 
-  return (
-    <div className="flex flex-col items-center w-full">
+return (
+    <div className="flex flex-col items-center w-full"> {/* Sökfält för text input*/}
       <div className="w-full flex justify-center py-12"
         style={{
           backgroundImage: "url('/MainImgGreen.png')",
@@ -43,25 +42,21 @@ export default function BookSearch({ onSearch }: BookSearchProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-        }}
-      >
-      {/* Sökfält */}
-      <div className="relative w-full max-w-lg">
+        }}>
+      <div className="relative w-full max-w-lg"> {/* Sökfält för text input*/}
         <input
           type="text"
           placeholder="Search..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && searchBooks()}
-          className="w-full py-3 pl-6 pr-14 text-lg text-gray-700 placeholder-gray-500 bg-white border-none rounded-full shadow-lg focus:outline-none"
-        />
-        <button onClick={searchBooks} className="absolute right-4 top-1/2 transform -translate-y-1/2">
+          className="w-full py-3 pl-6 pr-14 text-lg text-gray-700 placeholder-gray-500 bg-white border-none rounded-full shadow-lg focus:outline-none"/>
+        <button onClick={searchBooks} className="absolute right-4 top-1/2 transform -translate-y-1/2"> {/* Sök knapp*/}
           <img src="/SearchIcon.png" alt="Search" className="w-8 h-8" />
         </button>
       </div>
       </div>
-      {/* Välj sökningstyp */}
-      <div className="flex mt-4 space-x-4">
+      <div className="flex mt-4 space-x-4">   {/* sökningstyp/RadioButtons */}
   {["title", "author", "q"].map((type) => (
     <label key={type} className="flex items-center space-x-2 cursor-pointer">
       <input
@@ -78,10 +73,6 @@ export default function BookSearch({ onSearch }: BookSearchProps) {
     </label>
   ))}
 </div>
-
-
-
-
       {/* Resultat */}
       <div className="mt-6 w-full max-w-2xl">
         {loading ? (
