@@ -10,8 +10,8 @@ export type Book = {
   subjects: string[];
   title: string;
   number_of_pages?: number;
-  review?: Review;
-  cover_id?: string;
+  review?: any;
+  cover_i: string;
   coverUrl: string;
 };
 
@@ -26,7 +26,7 @@ export type Author = {
   source_records: string[];
   key: string;
   fuller_name: string;
-  cover_id?: string;
+  cover_i: string;
 };
 
 export type ApiResponse<T> = {

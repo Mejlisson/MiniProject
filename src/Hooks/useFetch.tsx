@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { Book, Author, ApiResponse, SearchParams } from "../API/types";
+import { Book, Author, ApiResponse, SearchParams } from "../types/types";
 
-export function useFetchAPI<T>(endpoint: string, params: SearchParams = {}): ApiResponse<T> {
+export function useFetchAPI<T>(
+  endpoint: string,
+  params: SearchParams = {},
+): ApiResponse<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -21,16 +24,20 @@ export function useFetchAPI<T>(endpoint: string, params: SearchParams = {}): Api
           if (value) queryParams.append(key, value);
         });
 
-        const response = await fetch(`https://openlibrary.org${endpoint}?${queryParams}`, { signal });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch(
+          `https://openlibrary.org${endpoint}?${queryParams}`,
+          { signal },
+        );
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
 
         const result = await response.json();
 
         // Hantera bok-sökning
         if (endpoint === "/search.json") {
-            if (!result.docs || result.docs.length === 0) {
-                throw new Error("Inga böcker hittades");
-            }
+          if (!result.docs || result.docs.length === 0) {
+            throw new Error("Inga böcker hittades");
+          }
           const booksWithCovers = result.docs.map((book: Book) => ({
             ...book,
             coverUrl: book.covers?.length
@@ -48,7 +55,7 @@ export function useFetchAPI<T>(endpoint: string, params: SearchParams = {}): Api
               : undefined,
           };
           setData(authorWithCover as T);
-        } 
+        }
         // Hantera övriga API-responser
         else {
           setData(result);

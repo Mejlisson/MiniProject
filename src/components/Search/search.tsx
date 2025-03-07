@@ -1,5 +1,5 @@
 //URL =  "https://openlibrary.org/dev/docs/api/search"
-import { Book} from "../../API/types";
+import { Book } from "../../types/types";
 import searchIcon from "../../Img/searchIcon.png";
 
 export default function Search() {
