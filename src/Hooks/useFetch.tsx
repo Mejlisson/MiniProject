@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { Book, Author, ApiResponse, SearchParams } from "../API/types";
+import { Book, ApiResponse, SearchParams } from "../API/types";
 
-export function useFetchAPI<T>(endpoint: string, params: SearchParams = {}): ApiResponse<T> {
+export function useFetchAPI<T>(
+  endpoint: string,
+  params: SearchParams = {},
+): ApiResponse<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -15,53 +18,44 @@ export function useFetchAPI<T>(endpoint: string, params: SearchParams = {}): Api
       setError(null);
 
       try {
-        // Bygg upp queryParams
+        // Build queryParams
         const queryParams = new URLSearchParams();
         Object.entries(params).forEach(([key, value]) => {
           if (value) queryParams.append(key, value);
         });
 
-        const response = await fetch(`https://openlibrary.org${endpoint}?${queryParams}`, { signal });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch(
+          `https://openlibrary.org${endpoint}?${queryParams}`,
+          { signal },
+        );
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
 
         const result = await response.json();
 
-        // Hantera bok-sökning
-        if (endpoint === "/search.json") {
-            if (!result.docs || result.docs.length === 0) {
-                throw new Error("Inga böcker hittades");
-            }
-          const booksWithCovers = result.docs.map((book: Book) => ({
-            ...book,
-            coverUrl: book.covers?.length
-              ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`
-              : undefined,
-          }));
-          setData(booksWithCovers as T);
-        }
-        // Hantera författarsökning
-        else if (endpoint.startsWith("/authors/")) {
-          const authorWithCover = {
-            ...result,
-            coverUrl: result.photos?.length
-              ? `https://covers.openlibrary.org/b/id/${result.photos[0]}-L.jpg`
-              : undefined,
-          };
-          setData(authorWithCover as T);
-        } 
-        // Hantera övriga API-responser
-        else {
-          setData(result);
-        }
+        // Handle book search results
+        const books = result.docs.map((book: any) => ({
+          title: book.title,
+          coverUrl: book.cover_i
+            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
+            : null,
+        }));
+
+        setData(books as T);
       } catch (err) {
-        if (!signal.aborted) setError(err as Error);
+        if (err instanceof Error) {
+          setError(err);
+        }
       } finally {
-        if (!signal.aborted) setLoading(false);
+        setLoading(false);
       }
     };
 
     fetchData();
-    return () => controller.abort();
+
+    return () => {
+      controller.abort();
+    };
   }, [endpoint, JSON.stringify(params)]);
 
   return { data, loading, error };
