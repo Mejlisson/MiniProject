@@ -11,11 +11,11 @@ const RandomBooksComponent: React.FC = () => {
           <img src="/giphy (1).gif" alt="Loading" className="mx-auto" />
         </div>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center space-x-30 justify-center pl-32">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 items-center space-x-30 justify-center pl-32">
           {books.map((book, index) => (
             <li
               key={index}
-              className="flex flex-col items-center w-40 bg-white p-4 rounded-lg shadow-[0px_0px_4px_3px_rgba(195,186,171,0.3)]"
+              className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-[0px_0px_4px_3px_rgba(195,186,171,0.3)]"
             >
               {book.coverUrl && (
                 <img

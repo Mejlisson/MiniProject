@@ -11,7 +11,7 @@ export type Book = {
     title: string;
     number_of_pages?: number;
     review?: Review;
-    cover_id?: string;
+    cover_i?: string;
   };
   
   export type Author = {
@@ -25,7 +25,7 @@ export type Book = {
     source_records: string[];
     key: string;
     fuller_name: string;
-    cover_id?: string;
+    cover_i?: string;
   };
   
   export type ApiResponse<T> = {
