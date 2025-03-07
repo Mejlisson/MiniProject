@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BookSearch from "./SearchBook";
+import SearchFunction from "./SearchFunction";
 import RandomBooksComponent from "../randomBooks/randomBooks";
 
 export default function CombinedSearch() {
@@ -7,7 +7,7 @@ export default function CombinedSearch() {
 
   return (
     <div className="flex flex-col items-center">
-      <BookSearch onSearch={(searching) => setIsSearching(searching)} />
+      <SearchFunction onSearch={(searching) => setIsSearching(searching)} />
       {!isSearching && <RandomBooksComponent />}
     </div>
   );
