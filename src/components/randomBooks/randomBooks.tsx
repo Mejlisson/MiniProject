@@ -1,6 +1,5 @@
 import React from "react";
 import useFetchBooks from "../../Hooks/useFetchBooksEffect";
-import { Book } from "../../types/types";
 
 const RandomBooksComponent: React.FC = () => {
   const { books, loading } = useFetchBooks();

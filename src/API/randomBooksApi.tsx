@@ -1,5 +1,6 @@
 import { Book } from "../types/types";
-export const fetchRandomBooks = async () => {
+
+export const fetchRandomBooks = async (): Promise<Book[]> => {
   const url = `https://openlibrary.org/subjects/fantasy.json?limit=50`;
   const response = await fetch(url);
   const data = await response.json();
@@ -13,13 +14,13 @@ export const fetchRandomBooks = async () => {
 
   // Skapa en lista med böcker som har omslagsbilder
   const booksWithCovers = data.works
-    .map((book: Book) => ({
+    .map((book: any) => ({
       title: book.title,
-      coverUrl: book.cover_i
-        ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
+      coverUrl: book.cover_id
+        ? `https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`
         : null,
     }))
-    .filter((book: { coverUrl: Book }) => book.coverUrl);
+    .filter((book: Book) => book.coverUrl);
 
   console.log("Books with covers:", booksWithCovers.length);
 
