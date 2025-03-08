@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { fetchRandomBooks } from "../API/randomBooksApi";
+import { Book } from "../types/types";
 
 const useFetchBooks = () => {
-  const [books, setBooks] = useState<
-    { title: string; coverUrl: string | null }[]
-  >([]);
+  const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    let isMounted = true;
     const fetchBooks = async () => {
       setLoading(true);
       const books = await fetchRandomBooks();
@@ -18,9 +16,6 @@ const useFetchBooks = () => {
     };
 
     fetchBooks();
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
   return { books, loading };
