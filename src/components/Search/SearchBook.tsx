@@ -75,7 +75,7 @@ export default function BookSearch({ onSearch }: BookSearchProps) {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && fetchBooks()}
             ref={inputRef} // Attach the ref to the input element
-            className="w-full py-3 pl-6 pr-14 text-lg text-gray-700 placeholder-gray-500 bg-white border-none rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+            className="w-full py-3 pl-6 pr-14 text-lg text-gray-700 placeholder-gray-500 bg-white border-none rounded-full shadow-lg  focus:ring-2 focus:ring-[75bcc0]"
           />
           <button
             onClick={fetchBooks}
