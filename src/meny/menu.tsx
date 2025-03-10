@@ -31,7 +31,8 @@ export default function HamburgerMenu() {
           )}
           {/* Dropdown menu */}
           {isOpen && (
-            <div className="absolute right-0 mt-2 w-48  bg-[#507B7C] rounded-md shadow-lg z-50">
+              <div className="bg-black/55 z-1000 fixed inset-0 w-screen h-screen">
+            <div className="absolute right-0 mt-2 w-50 h-screen bg-[#507B7C] rounded-md shadow-lg z-50">
               <ul className="flex flex-col text-white font-ravi">
                 <li className="p-4 hover:bg-gray-700">
                   <a href="#">Favorite Böcker</a>
@@ -48,6 +49,7 @@ export default function HamburgerMenu() {
                   className=" w-30 h-30 mx-auto p-2"
                 />
               </ul>
+            </div>
             </div>
           )}
         </button>
