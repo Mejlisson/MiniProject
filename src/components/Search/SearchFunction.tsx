@@ -3,7 +3,7 @@ import { useFetch } from "../../Hooks/useFetch";
 import AuthorSearch from "./SearchAuthorList";
 import SearchInput from "./SearchInput";  // Ny komponent för sökrutan
 import SearchFilters from "./SearchFilters"; // Ny komponent för radio-knappar
-import { Link } from "react-router-dom";
+
 import "../../meny/style.css";
 
 interface Book {
@@ -81,14 +81,14 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
             <ul className="grid grid-cols-4 sm:grid-cols-4 gap-6">
               {books.map((book: any, index: number) => (
                 <li key={index} className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-md">
-                <Link to={`/book/${book.title}`} className="text-center">
+                <div className="text-center">
                   <img
                     src={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` : "/MissingCover.png"}
                     alt={book.title}
-                    className="w-40 h-65 object-cover mb-2 rounded-md"
-                  />
-                  <h2 className="text-gray-700 font-semibold">{book.title}</h2>
-                </Link>
+                    className="w-50 h-40 object-contain mb-2"
+                    />
+                    <h2 className="text-gray-700 font-semibold text-center break-all">{book.title}</h2>
+                </div>
               </li>
               ))}
             </ul>
