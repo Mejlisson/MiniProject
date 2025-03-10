@@ -27,7 +27,7 @@ interface AuthorSearchProps {
           ))}
         </ul>
       ) : (
-        query && <p className="mt-4 text-red-600">Inga författare hittades</p>
+        query && <p className="flex justify-center items-center mt-4 text-red-600 animate-pulse">No Authors Found</p>
       )}
     </div>
   );
