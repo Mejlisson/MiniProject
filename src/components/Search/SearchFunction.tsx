@@ -3,6 +3,7 @@ import { useFetch } from "../../Hooks/useFetch";
 import AuthorSearch from "./SearchAuthorList";
 import SearchInput from "./SearchInput";  // Ny komponent för sökrutan
 import SearchFilters from "./SearchFilters"; // Ny komponent för radio-knappar
+import { Link } from "react-router-dom";
 
 interface Book {
   title: string;
@@ -72,20 +73,22 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
       ) : (
         <div className="mt-6 w-full max-w-2xl">
           {loading ? (
-            <p className="text-green-700 animate-pulse">Loading...</p>
+            <p className="text-center text-green-800 animate-pulse">Loading...</p>
           ) : error ? (
             <p className="text-red-600 text-center">{error}</p>
           ) : books.length > 0 ? (
             <ul className="grid grid-cols-4 sm:grid-cols-4 gap-6">
               {books.map((book: any, index: number) => (
                 <li key={index} className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-md">
+                <Link to={`/book/${book.title}`} className="text-center">
                   <img
                     src={book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` : "/MissingCover.png"}
                     alt={book.title}
-                    className="w-40 h-65 object-cover mb-2 rounded-md truncate"
+                    className="w-40 h-65 object-cover mb-2 rounded-md"
                   />
-                  <h2 className="text-center text-gray-700 font-semibold">{book.title}</h2>
-                </li>
+                  <h2 className="text-gray-700 font-semibold">{book.title}</h2>
+                </Link>
+              </li>
               ))}
             </ul>
           ) : (
