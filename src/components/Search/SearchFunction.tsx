@@ -4,6 +4,7 @@ import AuthorSearch from "./SearchAuthorList";
 import SearchInput from "./SearchInput";  // Ny komponent för sökrutan
 import SearchFilters from "./SearchFilters"; // Ny komponent för radio-knappar
 import { Link } from "react-router-dom";
+import "../../meny/style.css";
 
 interface Book {
   title: string;
@@ -73,7 +74,7 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
       ) : (
         <div className="mt-6 w-full max-w-2xl">
           {loading ? (
-            <p className="text-center text-green-800 animate-pulse">Loading...</p>
+            <p className="font-ravi text-center text-green-800 animate-pulse">Loading...</p>
           ) : error ? (
             <p className="text-red-600 text-center">{error}</p>
           ) : books.length > 0 ? (
@@ -93,7 +94,7 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
             </ul>
           ) : (
             searchTriggered &&
-            query && <p className="flex justify-center items-center mt-4 text-red-600 animate-bounce">No search results</p>
+            query && <p className="font-ravi flex justify-center items-center mt-4 text-red-600 animate-bounce">No search results</p>
           )}
         </div>
       )}

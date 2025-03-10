@@ -1,18 +1,19 @@
 import { useState } from "react";
+import "./style.css";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full bg-[#fff] p-4 flex items-center justify-between h-16 shadow-md">
+    <nav className="fixed w-full bg-[#fff] p-4 flex items-center justify-between h-20 shadow-md">
       <div className="flex items-center space-x-4">
-        <img src="LogoOwl.png" alt="Logo" className="h-10" />
-        <h1 className="font-Ravi text-2xl text-gray-800">Open Library</h1>
+        <img src="LogoOwl.png" alt="Logo" className="h-17 w25" />
+        <h1 className="font-ravi text-4xl text-gray-800">Open Library</h1>
       </div>
       <div className="flex items-center justify-end">
         {/* Logo */}
         {/* Hamburger button  */}
-        <h2 className="pr-3 font-ravi text-xl font-semibold hover:underline hover:bg[#507B7C]">
+        <h2 className="pr-3 font-ravi text-4xl hover:underline hover:bg[#507B7C]">
           Home
         </h2>
         <button

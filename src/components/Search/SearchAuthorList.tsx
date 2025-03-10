@@ -12,7 +12,7 @@ interface AuthorSearchProps {
     return (
         <div className="mt-6 w-full max-w-2xl">
       {loading ? (
-        <p className="text-center text-green-800 animate-pulse">Loading...</p>
+        <p className="font-ravi text-center text-green-800 animate-pulse">Loading...</p>
       ) : error ? (
         <p className="text-red-600 text-center">{error}</p>
       ) : authors.length > 0 ? (
@@ -24,7 +24,7 @@ interface AuthorSearchProps {
           ))}
         </ul>
       ) : (
-        query && <p className="flex justify-center items-center mt-4 text-red-600 animate-pulse">No Authors Found</p>
+        query && <p className="font-ravi flex justify-center items-center mt-4 text-red-600 animate-pulse">No Authors Found</p>
       )}
     </div>
   );

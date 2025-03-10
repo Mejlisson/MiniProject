@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: ['./src/**/*.{js,jsx,ts,tsx}',],
   theme: {
     extend: {
       fontFamily: {
-        ravi: ['"Ravi Prakash"', "cursive"], // Lägg till custom font
+        ravi: ['"Ravi Prakash"', "serif" ,"cursive"], // Lägg till custom font
       },
     },
   },
