@@ -1,8 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { MenuContext } from "../context/menuContext";
 import "./style.css";
 
 export default function HamburgerMenu() {
-  const [isOpen, setIsOpen] = useState(false);
+  const menuContext = useContext(MenuContext);
+  if (!menuContext) {
+    throw new Error("MenuContext must be used within a MenuProvider");
+  }
+  const { isOpen, setIsOpen } = menuContext;
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,7 +21,7 @@ export default function HamburgerMenu() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [menuRef]);
+  }, [menuRef, setIsOpen]);
 
   return (
     <nav className="fixed w-full bg-[#fff] p-4 flex items-center justify-between h-20 shadow-md">
@@ -25,9 +30,7 @@ export default function HamburgerMenu() {
         <h1 className="font-ravi text-4xl text-gray-800">Open Library</h1>
       </div>
       <div className="flex items-center justify-end">
-        {/* Logo */}
-        {/* Hamburger button  */}
-        <h2 className="pr-3 font-ravi text-4xl hover:underline hover:bg[#507B7C]">
+        <h2 className="pr-3 font-ravi text-4xl hover:underline hover:bg-[#507B7C]">
           Home
         </h2>
         <button
