@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.css";
 
 export default function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
 
   return (
     <nav className="fixed w-full bg-[#fff] p-4 flex items-center justify-between h-20 shadow-md">
@@ -31,25 +45,28 @@ export default function HamburgerMenu() {
           )}
           {/* Dropdown menu */}
           {isOpen && (
-              <div className="bg-black/55 z-1000 fixed inset-0 w-screen h-screen">
-            <div className="absolute right-0 mt-2 w-50 h-screen bg-[#507B7C] rounded-md shadow-lg z-50">
-              <ul className="flex flex-col text-white font-ravi">
-                <li className="p-4 hover:bg-gray-700">
-                  <a href="#">Favorite Böcker</a>
-                </li>
-                <li className="p-4 hover:bg-gray-700">
-                  <a href="#">Favorite Författare</a>
-                </li>
-                <li className="p-4 hover:bg-gray-700">
-                  <a href="#">Recenserade</a>
-                </li>
-                <img
-                  src="giphy (1).gif"
-                  alt="gif icon"
-                  className=" w-30 h-30 mx-auto p-2"
-                />
-              </ul>
-            </div>
+            <div
+              ref={menuRef}
+              className="bg-black/55 z-1000 fixed inset-0 w-screen h-screen"
+            >
+              <div className="absolute right-0 mt-2 w-50 h-screen bg-[#507B7C] rounded-md shadow-lg z-50">
+                <ul className="flex flex-col text-white font-ravi">
+                  <li className="p-4 hover:bg-gray-700">
+                    <a href="#">Favorite Böcker</a>
+                  </li>
+                  <li className="p-4 hover:bg-gray-700">
+                    <a href="#">Favorite Författare</a>
+                  </li>
+                  <li className="p-4 hover:bg-gray-700">
+                    <a href="#">Recenserade</a>
+                  </li>
+                  <img
+                    src="giphy (1).gif"
+                    alt="gif icon"
+                    className=" w-30 h-30 mx-auto p-2"
+                  />
+                </ul>
+              </div>
             </div>
           )}
         </button>
