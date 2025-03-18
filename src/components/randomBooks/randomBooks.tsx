@@ -1,5 +1,7 @@
 import React from "react";
 import useFetchBooks from "../../Hooks/useFetchBooksEffect";
+import { Link } from "react-router-dom";
+
 
 const RandomBooksComponent: React.FC = () => {
   const { books, loading } = useFetchBooks();
@@ -30,14 +32,17 @@ const RandomBooksComponent: React.FC = () => {
                 className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-[0px_0px_4px_3px_rgba(195,186,171,0.3)]"
               >
                 {book.coverUrl && (
-                  <img
-                    src={book.coverUrl}
-                    alt={book.title}
-                    className="w-50 h-40 object-contain mb-2"
-                  />
+
+                  
+                  <Link to={`/book/${book.key}`} className="text-center">
+                    <img
+                      src={book.coverUrl}
+                      alt={book.title}
+                      className="w-50 h-40 object-contain mb-0"
+                    />
+                  </Link>
                 )}
-                <h2 className="text-center break-words">{book.title}</h2>
-              </li>
+            </li>
             ))
           )}
         </ul>

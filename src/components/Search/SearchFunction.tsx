@@ -5,7 +5,7 @@ import SearchInput from "./SearchInput";
 import SearchFilters from "./SearchFilters";
 import { MenuContext } from "../../context/menuContext";
 import { SearchContext } from "../../context/searchContext";
-import { Link } from "react-router-dom"; // 🔹 Importera Link för navigation
+import { Link } from "react-router-dom";
 
 import "../../meny/style.css";
 
@@ -94,6 +94,8 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
                 <ul className="grid grid-cols-4 sm:grid-cols-4 gap-6">
                   {books.map((book) => (
                     <li key={book.key} className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-md">
+
+
                       {/*Klickbar länk till bokdetaljer */}
                       <Link to={`/book/${book.key}`} className="text-center">
                         <img
@@ -103,9 +105,10 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
                         />
                         <h2 className="text-gray-700 font-semibold text-center break-all">{book.title}</h2>
                       </Link>
+          
                       {/*Klickbar länk till författarsida */}
                       {book.author_name && (
-                        <Link to={`/author/${book.author_name[0]}`} className="text-blue-600 hover:underline mt-0"> {/* Här kommer man kunna klicka på */}
+                        <Link to={`/author/${book.author_name[0]}`} className="text-blue-600 hover:underline mt-0"> {/* Gjorder författaren böå så det syns tydligt*/}
                           {book.author_name[0]}
                         </Link>
                       )}
