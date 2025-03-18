@@ -14,7 +14,8 @@ export default function SearchInput({
   searchBooks,
   inputRef,
   onFocus,
-}: SearchInputProps) {
+}: 
+SearchInputProps) {
   return (
     <div className="w-full flex justify-center items-center bg-[url('/MainImgGreen.png')] bg-cover bg-center bg-no-repeat h-[400px]">
       <div className="relative w-full max-w-lg">

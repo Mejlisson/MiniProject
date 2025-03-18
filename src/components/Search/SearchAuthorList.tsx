@@ -1,4 +1,4 @@
-import { useFetch } from "../../Hooks/useFetch";
+import { Link } from "react-router-dom";
 
 interface AuthorSearchProps {
   query: string;
@@ -7,24 +7,26 @@ interface AuthorSearchProps {
   error: string | null;
 }
 
-  export default function AuthorSearch({ query, authors, loading, error }: AuthorSearchProps) {
-    
-    return (
-        <div className="mt-6 w-full max-w-2xl">
-      {loading ? (
-        <p className="font-ravi text-center text-green-800 animate-pulse">Loading...</p>
-      ) : error ? (
-        <p className="text-red-600 text-center">{error}</p>
-      ) : authors.length > 0 ? (
+export default function AuthorSearch({ query, authors, loading, error }: AuthorSearchProps) {
+  if (loading) return <p className="text-green-800 text-center animate-pulse">Loading...</p>;
+  if (error) return <p className="text-red-600 text-center">{error}</p>;
+
+  return (
+    <div className="mt-6 w-full max-w-2xl">
+      <h2 className="text-xl font-bold mb-4 text-center">Sök Resultat</h2>
+      {authors.length > 0 ? (
         <ul className="mt-4">
           {authors.map((author, index) => (
             <li key={index} className="py-2 text-gray-700 border-b">
-              {author}
+              {/* 🔹 Klickbar länk till författarsida */}
+              <Link to={`/author/${encodeURIComponent(author)}`} className="text-blue-600 hover:underline">
+                {author}
+              </Link>
             </li>
           ))}
         </ul>
       ) : (
-        query && <p className="font-ravi flex justify-center items-center mt-4 text-red-600 animate-pulse">No Authors Found</p>
+        <p className="text-red-600 text-center">Inga resultat för "{query}"</p>
       )}
     </div>
   );
