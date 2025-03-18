@@ -3,8 +3,6 @@ import { fetchRandomBooks } from "../API/randomBooksApi";
 import {
   bookReducer,
   initialState,
-  BookState,
-  BookAction,
 } from "../Hooks/UseReducer";
 
 const useFetchBooks = () => {
