@@ -1,24 +1,33 @@
-import { useState, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import { fetchRandomBooks } from "../API/randomBooksApi";
-import { Book } from "../types/types";
+import {
+  bookReducer,
+  initialState,
+} from "../Hooks/UseReducer";
 
 const useFetchBooks = () => {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [state, dispatch] = useReducer(
+    bookReducer,
+    initialState,
+  );
 
   useEffect(() => {
     const fetchBooks = async () => {
-      setLoading(true);
-      const books = await fetchRandomBooks();
-      setBooks(books);
-      setLoading(false);
-      console.log("Number of books:", books.length);
+      dispatch({ type: "FETCH_START" });
+
+      try {
+        const books = await fetchRandomBooks();
+        dispatch({ type: "FETCH_SUCCESS", payload: books });
+        console.log("Number of books:", books.length);
+      } catch (error) {
+        dispatch({ type: "FETCH_ERROR" });
+      }
     };
 
     fetchBooks();
   }, []);
 
-  return { books, loading };
+  return state; // Returnerar hela state-objektet
 };
 
 export default useFetchBooks;
