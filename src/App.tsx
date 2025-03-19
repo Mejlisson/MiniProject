@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FavoriteBooks from "./meny/Books";
 import FavoriteAuthors from "./meny/Authors";
 import Reviews from "./meny/Reviews";
-import BookDetails from "./components/Books/BookDetails";
-import AuthorDetails from "./components/Books/AuthorDetails";
+import BookDetails from "./components/Details/BookDetails";
+import AuthorDetails from "./components/Details/AuthorDetails";
 
 function App() {
   return (
