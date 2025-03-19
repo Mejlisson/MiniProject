@@ -61,39 +61,38 @@ export default function HamburgerMenu() {
 
         {/* Dropdown-menyn */}
         {isOpen && (
-          <div
-            ref={menuRef}
-            className="bg-black/55 z-1000 fixed inset-0 w-screen h-screen"
-          >
-            <div className="absolute right-0 mt-2 w-50 h-screen bg-[#507B7C] rounded-md shadow-lg z-50">
-              <ul className="flex flex-col text-white font-ravi">
-                <Link
-                  to="/menu/Books"
-                  className="hover:bg-gray-700 p-4"
-                  onClick={() => setIsOpen(false)} // Stänger menyn vid klick
-                >
-                  Favorite Books
-                </Link>
-                <Link
-                  to="/menu/Authors"
-                  className="hover:bg-gray-700 p-4"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Favorite Arthor
-                </Link>
-                <Link
-                  to="/menu/Reviews"
-                  className="hover:bg-gray-700 p-4"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Reviews
-                </Link>
-                <img
-                  src="/giphy (1).gif"
-                  alt="gif icon"
-                  className=" w-30 h-30 mx-auto p-2"
-                />
-              </ul>
+          <div className="bg-black/55 z-1000 fixed inset-0 w-screen h-screen">
+            <div ref={menuRef} onClick={(e) => e.stopPropagation()}>
+              <div className="absolute right-0  w-50 h-screen bg-[#507B7C] rounded-md shadow-lg z-50">
+                <ul className="flex flex-col text-white font-ravi">
+                  <Link
+                    to="/menu/Books"
+                    className="hover:bg-gray-700 p-4"
+                    onClick={() => setIsOpen(false)} // Stänger menyn vid klick
+                  >
+                    Favorite Books
+                  </Link>
+                  <Link
+                    to="/menu/Authors"
+                    className="hover:bg-gray-700 p-4"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Favorite Arthor
+                  </Link>
+                  <Link
+                    to="/menu/Reviews"
+                    className="hover:bg-gray-700 p-4"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Reviews
+                  </Link>
+                  <img
+                    src="/giphy (1).gif"
+                    alt="gif icon"
+                    className=" w-30 h-30 mx-auto p-2"
+                  />
+                </ul>
+              </div>
             </div>
           </div>
         )}
