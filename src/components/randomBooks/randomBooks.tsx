@@ -42,6 +42,7 @@ const RandomBooksComponent: React.FC = () => {
                     />
                   </Link>
                 )}
+                <h2 className="text-center break-words">{book.title}</h2>
             </li>
             ))
           )}
