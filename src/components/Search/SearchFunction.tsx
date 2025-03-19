@@ -75,9 +75,14 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
     onSearch(true);
   };
 
+  const handleSearchFocus = () => { 
+    setIsOpen(false);
+  };
+  
+
   return (
     <div className="flex flex-col items-center w-full">
-        <SearchInput query={query} setQuery={setQuery} searchBooks={searchItems} inputRef={inputRef} />
+        <SearchInput query={query} setQuery={setQuery} searchBooks={searchItems} inputRef={inputRef} onFocus={handleSearchFocus}/>
         <SearchFilters searchType={searchType} setSearchType={setSearchType} />
 
       <div className="mt-6 w-full max-w-2xl">
