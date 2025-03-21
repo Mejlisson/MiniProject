@@ -7,8 +7,16 @@ interface AuthorSearchProps {
   error: string | null;
 }
 
-export default function AuthorSearch({ query, authors, loading, error }: AuthorSearchProps) {
-  if (loading) return <p className="text-green-800 text-center animate-pulse">Loading...</p>;
+export default function AuthorSearch({
+  query,
+  authors,
+  loading,
+  error,
+}: AuthorSearchProps) {
+  if (loading)
+    return (
+      <p className="text-green-800 text-center animate-pulse">Loading...</p>
+    );
   if (error) return <p className="text-red-600 text-center">{error}</p>;
 
   return (
@@ -19,7 +27,10 @@ export default function AuthorSearch({ query, authors, loading, error }: AuthorS
           {authors.map((author, index) => (
             <li key={index} className="py-2 text-gray-700 border-b">
               {/* 🔹 Klickbar länk till författarsida */}
-              <Link to={`/author/${encodeURIComponent(author)}`} className="text-blue-600 hover:underline">
+              <Link
+                to={`/author/${encodeURIComponent(author)}`}
+                className="text-blue-600 hover:underline"
+              >
                 {author}
               </Link>
             </li>
