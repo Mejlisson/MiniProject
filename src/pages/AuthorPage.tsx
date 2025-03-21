@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const AuthorPage = () => {
-  const { id } = useParams<{ id: string }>(); // Hämtar author-id från URL
-  const [authorData, setAuthorData] = useState<any>(null); // Här lagrar vi författarens data
+  const { id } = useParams<{ id: string }>(); 
+  const [authorData, setAuthorData] = useState<any>(null); 
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

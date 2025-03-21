@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 const RootLayout = () => {
   return (
     <div className="layout">
-      {/* HamburgerMenu at the top */}
       <HamburgerMenu />
 
       {/* Main content area */}
@@ -13,7 +12,6 @@ const RootLayout = () => {
         <Outlet />
       </main>
 
-      {/* Footer at the bottom */}
       <Footer />
     </div>
   );
