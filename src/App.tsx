@@ -1,32 +1,28 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BookPage from "./pages/BookPage";
+import RootLayout from "./layouts/RootLayout";
+import HomePage from "./pages/HomePage";
+import AuthorPage from "./pages/AuthorPage";
 import "./App.css";
-import CombinedSearch from "./components/Search/CombinedSearch";
-import { MenuProvider } from "./context/menuContext";
-import { SearchProvider } from "./context/searchContext";
-import HamburgerMenu from "./meny/menu";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import FavoriteBooks from "./meny/Books";
-import FavoriteAuthors from "./meny/Authors";
-import Reviews from "./meny/Reviews";
-import BookDetails from "./components/Details/BookDetails";
-import AuthorDetails from "./components/Details/AuthorDetails";
+import { MenuProvider } from "./context/MenuContext";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <HomePage /> }, 
+        { path: "book/:bookTitleSlug", element: <BookPage /> }, // Dynamisk ruta för bok
+      { path: "author/:id", element: <AuthorPage /> },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <Router>
-      <MenuProvider>
-        <SearchProvider>
-          <HamburgerMenu />
-          <Routes>
-            <Route path="/" element={<CombinedSearch />} />
-            <Route path="/meny/Books" element={<FavoriteBooks />} />
-            <Route path="/meny/Authors" element={<FavoriteAuthors />} />
-            <Route path="/meny/Reviews" element={<Reviews />} />
-            <Route path="/book/:id" element={<BookDetails />} />
-            <Route path="/author/:name" element={<AuthorDetails />} />
-          </Routes>
-        </SearchProvider>
-      </MenuProvider>
-    </Router>
+    <MenuProvider>
+      <RouterProvider router={router} />
+    </MenuProvider>
   );
 }
 

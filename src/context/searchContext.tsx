@@ -1,25 +1,23 @@
-import React, { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode } from "react";
+
+type SearchType = "title" | "author" | "q";
 
 interface SearchContextProps {
   query: string;
   setQuery: (query: string) => void;
-  searchType: "title" | "author" | "q";
-  setSearchType: (type: "title" | "author" | "q") => void;
+  searchType: SearchType;
+  setSearchType: (type: SearchType) => void;
   searchTriggered: boolean;
   setSearchTriggered: (triggered: boolean) => void;
 }
 
-export const SearchContext = createContext<SearchContextProps | undefined>(
-  undefined,
-);
+export const SearchContext = createContext<SearchContextProps | null>(null);
 
 export const SearchProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [query, setQuery] = useState<string>("");
-  const [searchType, setSearchType] = useState<"title" | "author" | "q">(
-    "title",
-  );
+  const [query, setQuery] = useState("");
+  const [searchType, setSearchType] = useState<SearchType>("title");
   const [searchTriggered, setSearchTriggered] = useState(false);
 
   return (

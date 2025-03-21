@@ -1,15 +1,9 @@
 import { useEffect, useReducer } from "react";
-import { fetchRandomBooks } from "../API/randomBooksApi";
-import {
-  bookReducer,
-  initialState,
-} from "../Hooks/UseReducer";
+import { fetchRandomBooks } from "../api/fetchRandomBooks";
+import { bookReducer, initialState } from "../reducers/bookReducer";
 
 const useFetchBooks = () => {
-  const [state, dispatch] = useReducer(
-    bookReducer,
-    initialState,
-  );
+  const [state, dispatch] = useReducer(bookReducer, initialState);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -18,9 +12,10 @@ const useFetchBooks = () => {
       try {
         const books = await fetchRandomBooks();
         dispatch({ type: "FETCH_SUCCESS", payload: books });
-        console.log("Number of books:", books.length);
+        console.log("Antal böcker hämtade:", books.length);
       } catch (error) {
-        dispatch({ type: "FETCH_ERROR" });
+        console.error("Fel vid hämtning av böcker:", error);
+        dispatch({ type: "FETCH_ERROR", payload: error instanceof Error ? error.message : "Unknown error" });
       }
     };
 

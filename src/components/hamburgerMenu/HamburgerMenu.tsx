@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
-import { MenuContext } from "../context/menuContext";
-import { Link, useNavigate } from "react-router-dom";
-import "./style.css";
+import { MenuContext } from "../../context/MenuContext";
+import {  useNavigate } from "react-router-dom";
 
 export default function HamburgerMenu() {
   const menuContext = useContext(MenuContext);
@@ -65,27 +64,27 @@ export default function HamburgerMenu() {
             <div ref={menuRef} onClick={(e) => e.stopPropagation()}>
               <div className="absolute right-0  w-50 h-screen bg-[#507B7C] rounded-md shadow-lg z-50">
                 <ul className="flex flex-col text-white font-ravi">
-                  <Link
-                    to="/menu/Books"
+                  <li
+                    // to="/menu/Books"
                     className="hover:bg-gray-700 p-4"
                     onClick={() => setIsOpen(false)} // Stänger menyn vid klick
                   >
                     Favorite Books
-                  </Link>
-                  <Link
-                    to="/menu/Authors"
+                  </li>
+                  <li
+                    // to="/menu/Authors"
                     className="hover:bg-gray-700 p-4"
                     onClick={() => setIsOpen(false)}
                   >
                     Favorite Arthor
-                  </Link>
-                  <Link
-                    to="/menu/Reviews"
+                  </li>
+                  <li
+                    // to="/menu/Reviews"
                     className="hover:bg-gray-700 p-4"
                     onClick={() => setIsOpen(false)}
                   >
                     Reviews
-                  </Link>
+                  </li>
                   <img
                     src="/giphy (1).gif"
                     alt="gif icon"

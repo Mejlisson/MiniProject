@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Ravi Prakash';
+  src: url('/path/to/your/font/RaviPrakash.woff2') format('woff2'),
+    url('/path/to/your/font/RaviPrakash.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-ravi {
+  font-family: 'Ravi Prakash', sans-serif;
+}
+
+/* The root layout container */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
+}
+
+/* The main content area */
+.content {
+  flex-grow: 1;
+  padding: 16px;
+  background-color: #f9f9f9;
+}
