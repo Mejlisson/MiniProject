@@ -8,9 +8,10 @@ export const fetchRandomBooks = async (): Promise<Book[]> => {
     if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
 
     const data = await response.json();
+    // console.log("Raw API response:", data); // Debuging
 
     if (!data.works?.length) {
-      console.log("Inga böcker hittades");
+      // console.log("Inga böcker hittades");
       return [];
     }
 

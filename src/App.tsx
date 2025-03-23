@@ -11,8 +11,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
-      { index: true, element: <HomePage /> }, 
-        { path: "book/:bookTitleSlug", element: <BookPage /> }, // Dynamisk ruta för bok
+      { index: true, element: <HomePage /> },
+      { path: "book/:bookSlug", element: <BookPage /> },
       { path: "author/:id", element: <AuthorPage /> },
     ],
   },

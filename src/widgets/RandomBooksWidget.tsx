@@ -1,19 +1,22 @@
 import useFetchBooks from "../hooks/useFetchBooks";
 import { useNavigate } from "react-router-dom";
+import slugify from "slugify";
 import { Book } from "../types/types";
 
 const RandomBooksWidget = () => {
   const { books, loading } = useFetchBooks();
-  const navigate = useNavigate(); // Skapa en navigate-funktion
+  const navigate = useNavigate();
+
+  const slugify = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  };
 
   const handleBookClick = (book: Book) => {
-    if (!book.key?.startsWith("/works/")) {
-      console.error("Invalid book key:", book.key);
-      return;
-    }
-
-    const bookId = book.key.replace("/works/", "");
-    navigate(`/book/${bookId}`);
+    const bookSlug = slugify(book.title); // Ändrar url som booken title med slug
+    navigate(`/book/${bookSlug}`); 
   };
 
   return (
@@ -34,7 +37,7 @@ const RandomBooksWidget = () => {
           ) : (
             books.map((book, index) => (
               <li
-                key={index}
+                key={book.key || index}
                 className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-[0px_0px_4px_3px_rgba(195,186,171,0.3)] cursor-pointer"
                 onClick={() => handleBookClick(book)}
               >
