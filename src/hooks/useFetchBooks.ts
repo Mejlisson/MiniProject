@@ -12,7 +12,7 @@ const useFetchBooks = () => {
       try {
         const books = await fetchRandomBooks();
         dispatch({ type: "FETCH_SUCCESS", payload: books });
-        console.log("Antal böcker hämtade:", books.length);
+        // console.log("Antal böcker hämtade:", books.length);
       } catch (error) {
         console.error("Fel vid hämtning av böcker:", error);
         dispatch({ type: "FETCH_ERROR", payload: error instanceof Error ? error.message : "Unknown error" });

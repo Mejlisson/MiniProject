@@ -25,6 +25,8 @@ export const bookReducer = (
     case "FETCH_START":
       return { ...state, loading: true, error: null };
     case "FETCH_SUCCESS":
+      // console.log("Books payload:", action.payload); // Debugging
+
       return { books: action.payload, loading: false, error: null };
     case "FETCH_ERROR":
       return { books: [], loading: false, error: action.payload };
