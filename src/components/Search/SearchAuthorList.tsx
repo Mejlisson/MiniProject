@@ -13,6 +13,13 @@ export default function AuthorSearch({
   loading,
   error,
 }: AuthorSearchProps) {
+  // La till en enkel filtrering baserad på query
+  const filteredAuthors = query.trim() === ""
+    ? authors // om man inte söker visas alla författare
+    : authors.filter(author =>
+        author.toLowerCase().includes(query.toLowerCase())
+      );
+
   if (loading)
     return (
       <p className="text-green-800 text-center animate-pulse">Loading...</p>
@@ -22,11 +29,10 @@ export default function AuthorSearch({
   return (
     <div className="mt-6 w-full max-w-2xl">
       <h2 className="text-xl font-bold mb-4 text-center">Sök Resultat</h2>
-      {authors.length > 0 ? (
+      {filteredAuthors.length > 0 ? (  //filterede Authors istället för authors
         <ul className="mt-4">
-          {authors.map((author, index) => (
+          {filteredAuthors.map((author, index) => (
             <li key={index} className="py-2 text-gray-700 border-b">
-              {/* 🔹 Klickbar länk till författarsida */}
               <Link
                 to={`/author/${encodeURIComponent(author)}`}
                 className="text-blue-600 hover:underline"
@@ -37,7 +43,9 @@ export default function AuthorSearch({
           ))}
         </ul>
       ) : (
-        <p className="text-red-600 text-center">Inga resultat för "{query}"</p>
+        <p className="text-red-600 text-center">
+          {query ? `Inga resultat för "${query}"` : "Skriv en sökfråga"}
+        </p>
       )}
     </div>
   );
