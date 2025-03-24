@@ -3,6 +3,7 @@ import BookPage from "./pages/BookPage";
 import RootLayout from "./layouts/RootLayout";
 import HomePage from "./pages/HomePage";
 import AuthorPage from "./pages/AuthorPage";
+import AboutPage from "./pages/AboutPage";
 import "./App.css";
 import { MenuProvider } from "./context/MenuContext";
 
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "book/:bookKey/:bookSlug", element: <BookPage /> }, // Matchar både bookKey och bookSlug
       { path: "author/:authorKey", element: <AuthorPage /> }, // Lägg till författarens sida
+      { path: "about", element: <AboutPage /> },
     ],
   },
 ]);

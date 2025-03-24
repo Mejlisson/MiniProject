@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-r from-gray-800 to-teal-700 text-white py-2">
@@ -9,9 +11,7 @@ export default function Footer() {
 
         {/* About Us-sektion */}
         <div className="flex items-center space-x-2 pr-15">
-          <span className="font-ravi text-lg font-semibold text-[#DCD0BD]">
-            About Us
-          </span>
+          <Link to={"about"}>About Us</Link>
           <div className="h-8 w-8 bg-[#DCD0BD] rounded-full flex items-center justify-center">
             <img
               src="/AboutIcon.png"
