@@ -7,6 +7,7 @@ import { MenuContext } from "../../context/MenuContext";
 import { SearchContext } from "../../context/SearchContext";
 import { Link } from "react-router-dom";
 import { Book } from "../../types/types";
+import useNavigateToBook from "../../hooks/useNavigateToBook";
 
 interface BookSearchProps {
   onSearch: (searching: boolean) => void;
@@ -15,6 +16,7 @@ interface BookSearchProps {
 export default function SearchFunction({ onSearch }: BookSearchProps) {
   const menuContext = useContext(MenuContext);
   const searchContext = useContext(SearchContext);
+  const navigateToBook = useNavigateToBook();
 
   if (!searchContext) {
     throw new Error("SearchContext must be used within a SearchProvider");
@@ -39,11 +41,7 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
     data: books,
     loading: bookLoading,
     error: bookError,
-  } = useFetch<Book>(
-    bookUrl,
-    query,
-    searchTriggered && searchType === "title",
-  );
+  } = useFetch<Book>(bookUrl, query, searchTriggered && searchType === "title");
 
   const {
     data: authorData,
@@ -117,7 +115,10 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
                     className="flex flex-col items-center w-40 h-65 bg-white p-4 shadow-md"
                   >
                     {/*Klickbar länk till bokdetaljer */}
-                    <Link to={`/book/${book.key}`} className="text-center">
+                    <button
+                      onClick={() => navigateToBook(book)} // Använd hooken för navigering
+                      className="text-center"
+                    >
                       <img
                         src={
                           book.cover_i
@@ -130,7 +131,7 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
                       <h2 className="text-gray-700 font-semibold text-center break-all">
                         {book.title}
                       </h2>
-                    </Link>
+                    </button>
 
                     {/*Klickbar länk till författarsida */}
                     {book.author_name && (

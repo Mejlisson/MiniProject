@@ -12,8 +12,8 @@ export type Book = {
   number_of_pages?: number;
   review?: string;
   cover_i?: string;
-  coverUrl?: string |null;
-  authors?: Author[];
+  coverUrl?: string | null;
+  authors?: { author: { key: string } }[]; // Add authors property
 };
 
 export type Author = {
@@ -44,8 +44,3 @@ export type SearchParams = {
   sort?: string;
   [key: string]: string | undefined;
 };
- 
-  
-  
-
- 
