@@ -12,8 +12,8 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "book/:bookSlug", element: <BookPage /> },
-      { path: "author/:id", element: <AuthorPage /> },
+      { path: "book/:bookKey/:bookSlug", element: <BookPage /> }, // Matchar både bookKey och bookSlug
+      { path: "author/:authorKey", element: <AuthorPage /> }, // Lägg till författarens sida
     ],
   },
 ]);
