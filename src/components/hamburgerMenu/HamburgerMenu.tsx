@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import { MenuContext } from "../../context/menuContext";
-import {  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function HamburgerMenu() {
   const menuContext = useContext(MenuContext);
@@ -28,7 +28,9 @@ export default function HamburgerMenu() {
     <nav className="fixed w-full bg-[#fff] p-4 flex items-center justify-between h-20 shadow-md">
       <div className="flex items-center space-x-4">
         <img src="/LogoOwl.png" alt="Logo" className="h-17 w25" />
-        <h1 className="font-ravi text-4xl text-gray-800">Open Library</h1>
+        <Link to={"/"}>
+          <h1 className="font-ravi text-4xl text-gray-800">Open Library</h1>
+        </Link>
       </div>
       <div className="flex items-center justify-end">
         {/* Home-knapp */}
