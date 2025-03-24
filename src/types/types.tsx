@@ -17,6 +17,7 @@ export type Book = {
 };
 
 export type Author = {
+  [x: string]: any;
   name: string;
   title: string;
   bio: string | { key: string; value: string };
