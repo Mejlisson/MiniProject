@@ -30,7 +30,8 @@ export default function SearchInput({
         />
         <button
           onClick={searchBooks}
-          className="absolute cursor-pointer right-4 top-1/2 transform -translate-y-1/2"
+          className="absolute cursor-pointer right-4 top-1/2 transform -translate-y-1/2 
+  transition-all duration-300 ease-in-out hover:scale-110 hover:rotate-12 focus:scale-110 focus:rotate-12 opacity-95"
         >
           <img src="/SearchIcon.png" alt="Search" className="w-12 h-10" />
         </button>
