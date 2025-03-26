@@ -13,7 +13,7 @@ export type Book = {
   review?: string;
   cover_i?: string;
   coverUrl?: string | null;
-  authors?: { author: { key: string } }[]; // Add authors property
+  authors: Author[];
 };
 
 export type Author = {

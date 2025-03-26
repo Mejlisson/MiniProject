@@ -1,13 +1,32 @@
+import { useEffect, useState } from "react";
+import { fetchAuthorDetails } from "../../../api/fetchAuthorsByRandomBooks";
 import { FaHeart, FaStar } from "react-icons/fa";
-import { Book, Author } from "../../../types/types";
-import { useState } from "react";
+import type { Book } from "../../../types/types";
 
 const BookDetails = ({ book }: { book: Book }) => {
+  const [authors, setAuthors] = useState<{ key: string; name: string }[]>([]);
   const [rating, setRating] = useState<number | null>(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
+  useEffect(() => {
+    const fetchAuthors = async () => {
+      if (!Array.isArray(book.authors)) return;
+
+      const fetchedAuthors = await Promise.all(
+        book.authors.map(async (authorWrapper: any) => {
+          const authorKey = authorWrapper.author?.key;
+          return await fetchAuthorDetails(authorKey);
+        }),
+      );
+
+      setAuthors(fetchedAuthors);
+    };
+
+    fetchAuthors();
+  }, [book.authors]);
+
   return (
-    <div className="flex flex-col md:flex-row gap-6 bg-white p6 rounded-lg shadow-lg w-5/6 h-90 ">
+    <div className="flex flex-col md:flex-row gap-6 bg-white p-6 rounded-lg shadow-lg w-5/6 ">
       {/* Book Cover + Favorite Button */}
       <div className="relative">
         <img
@@ -16,7 +35,7 @@ const BookDetails = ({ book }: { book: Book }) => {
           alt={book.title}
         />
         <button
-          className={`absolute top-2 -right-200  text-3xl ${
+          className={`absolute top-2 -right-200 text-3xl ${
             isFavorite ? "text-red-500" : "text-gray-300"
           }`}
           onClick={() => setIsFavorite(!isFavorite)}
@@ -33,12 +52,11 @@ const BookDetails = ({ book }: { book: Book }) => {
             : book.description?.value || "No description found..."}
         </p>
         <p className="font-ravi text-xl text-gray-900 mt-2">
-          Authors:
-          {book.authors && book.authors.length > 0
-            ? book.authors.map((author: Author, index) => (
+          {authors.length > 0
+            ? authors.map((author, index) => (
                 <span key={author.key || index}>{author.name}</span>
               ))
-            : " Unknown"}
+            : "Unknown"}
         </p>
         {/* Rating */}
         <div className="mt-1 flex text-yellow-400 text-2xl">
