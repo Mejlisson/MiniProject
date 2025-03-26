@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Ravi Prakash';
-  src: url('/path/to/your/font/RaviPrakash.woff2') format('woff2'),
-    url('/path/to/your/font/RaviPrakash.woff') format('woff');
+  font-family: 'RaviPrakash';
+  src: url('/fonts/RaviPrakash.woff2') format('woff2'),
+    url('/fonts/RaviPrakash.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
