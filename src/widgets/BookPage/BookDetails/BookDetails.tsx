@@ -73,11 +73,9 @@ const BookDetails = ({ book }: { book: Book }) => {
           {[1, 2, 3, 4, 5].map((star) => (
             <FaStar
               key={star}
-              className={
-                rating !== null && star <= rating
-                  ? "text-yellow-500"
-                  : "text-gray-300"
-              }
+              className={`transition-all duration-300 ease-in-out cursor-pointer
+        ${rating !== null && star <= rating ? "text-yellow-500 scale-110" : "text-gray-300"}
+        hover:scale-125 hover:text-yellow-400 active:scale-95`}
               onClick={() => setRating(star)}
             />
           ))}
