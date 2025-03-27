@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchAuthorDetails } from "../../../api/fetchAuthorsByRandomBooks";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { Book, Author } from "../../../types/types";
-import { useFavoritBooks } from "../../../hooks/useFavorite";
+import { useFavoritBooks } from "../../../hooks/useFavoritBook";
 
 const BookDetails = ({ book }: { book: Book }) => {
   const [authors, setAuthors] = useState<{ key: string; name: string }[]>([]);

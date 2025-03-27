@@ -1,4 +1,4 @@
-import { useFavoritBooks } from "../../hooks/useFavorite";
+import { useFavoritBooks } from "../../hooks/useFavoritBook";
 import { FaHeart } from "react-icons/fa";
 
 const FavoritBooks = () => {
