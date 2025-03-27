@@ -33,7 +33,7 @@ const FavoritBooks = () => {
 
 
                             <button
-                                className="mt-2 text-red-500 hover:text-red-400 hover:scale-200 duration-400 text-xl"
+                                className="mt-2 text-red-500 hover:text-red-400 hover:scale-200 duration-400 hover:drop-shadow-md cursor-pointer text-xl"
                                 onClick={() => toggleFavorite(book)}
                                 title="Remove from favorites"
                             >
