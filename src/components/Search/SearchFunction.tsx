@@ -94,7 +94,12 @@ export default function SearchFunction({ onSearch }: BookSearchProps) {
           <p className="text-green-800 text-center animate-pulse">Loading...</p>
         )}
         {bookError || authorError ? (
-          <p className="text-red-600 text-center">{bookError || authorError}</p>
+          <p className="font-ravi flex justify-center items-center mt-4 text-red-600 animate-bounce">
+            {searchTriggered &&
+              Array.isArray(books) &&
+              books.length === 0 &&
+              "No search results"}
+          </p>
         ) : searchTriggered && query ? (
           searchType === "author" ? (
             <AuthorSearch
