@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import AuthorPage from "./pages/AuthorPage";
 import AboutPage from "./pages/AboutPage";
 import "./App.css";
-import { MenuProvider } from "./context/MenuContext";
+import { MenuProvider } from "./context/menuContext";
 import FavoritPage from "./widgets/FavoritBook/FavoritBookPage";
 
 
