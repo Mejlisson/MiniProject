@@ -1,15 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import BookPage from "./pages/BookPage";
-import RootLayout from "./layouts/RootLayout";
+import "./App.css";
+
+// Pages & Layouts
 import HomePage from "./pages/HomePage";
+import BookPage from "./pages/BookPage";
 import AuthorPage from "./pages/AuthorPage";
 import AboutPage from "./pages/AboutPage";
-import "./App.css";
-import { MenuProvider } from "./context/menuContext";
 import FavoritPage from "./widgets/FavoritBook/FavoritBookPage";
-import { FavoriteProvider } from "./widgets/FavoritBook/FavoritBookContext";//FavoriteProvider
+import RootLayout from "./layouts/RootLayout";
 
+// Context Providers
+import { MenuProvider } from "./context/MenuContext";
+import { FavoriteProvider } from "./widgets/FavoritBook/FavoritBookContext";
 
+// Routing
 const router = createBrowserRouter([
   {
     path: "/",
