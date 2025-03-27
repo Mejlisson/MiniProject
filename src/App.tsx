@@ -7,6 +7,7 @@ import AboutPage from "./pages/AboutPage";
 import "./App.css";
 import { MenuProvider } from "./context/menuContext";
 import FavoritPage from "./widgets/FavoritBook/FavoritBookPage";
+import { FavoriteProvider } from "./widgets/FavoritBook/FavoritBookContext";//FavoriteProvider
 
 
 const router = createBrowserRouter([
@@ -15,10 +16,10 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "book/:bookKey/:bookSlug", element: <BookPage /> },// Matchar både bookKey och bookSlug
-      { path: "author/:authorKey", element: <AuthorPage /> },// Lägg till författarens sida
+      { path: "book/:bookKey/:bookSlug", element: <BookPage /> },
+      { path: "author/:authorKey", element: <AuthorPage /> },
       { path: "about", element: <AboutPage /> },
-      { path: "favorites", element: <FavoritPage /> }, // <-- favoritBöcker
+      { path: "favorites", element: <FavoritPage /> },
     ],
   },
 ]);
@@ -26,7 +27,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <MenuProvider>
-      <RouterProvider router={router} />
+      <FavoriteProvider>
+        <RouterProvider router={router} />
+      </FavoriteProvider>
     </MenuProvider>
   );
 }

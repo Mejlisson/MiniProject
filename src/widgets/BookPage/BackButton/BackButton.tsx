@@ -8,7 +8,7 @@ const BackButton = ({ navigate }: { navigate: (path: number) => void }) => {
     >
       <FaArrowLeft className="transition-transform duration-300 group-hover:-translate-x-1 group-hover:scale-110" />
       <span className="transition-all duration-300 group-hover:scale-105">
-        Backwards
+        Go Back
       </span>
     </button>
   );
