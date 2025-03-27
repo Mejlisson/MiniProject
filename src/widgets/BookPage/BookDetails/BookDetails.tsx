@@ -3,12 +3,26 @@ import { fetchAuthorDetails } from "../../../api/fetchAuthorsByRandomBooks";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { Book, Author } from "../../../types/types";
 import { useFavoritBooks } from "../../../hooks/useFavoritBook";
+import { useRating } from "../../../context/RatingContext";
 
 const BookDetails = ({ book }: { book: Book }) => {
   const [authors, setAuthors] = useState<{ key: string; name: string }[]>([]);
   const [rating, setRating] = useState<number | null>(null);
   const { toggleFavorite, isFavorite } = useFavoritBooks();
   const [loading, setLoading] = useState<boolean>(true);
+  const { addRating, ratings } = useRating();
+
+  useEffect(() => {
+    const savedRating = ratings.find((r) => r.bookKey === book.key)?.rating;
+    if (savedRating) {
+      setRating(savedRating);
+    }
+  }, [book.key, ratings]);
+
+  const handleRating = (star: number) => {
+    setRating(star); // Uppdatera lokalt state
+    addRating(book.key, book.title, star); // Spara betyget i global state
+  };
 
   useEffect(() => {
     const fetchAuthors = async () => {
@@ -25,7 +39,7 @@ const BookDetails = ({ book }: { book: Book }) => {
       );
 
       setAuthors(fetchedAuthors);
-      setLoading(false); // Stoppa laddningen när data är laddad
+      setLoading(false);
     };
 
     fetchAuthors();
@@ -33,8 +47,13 @@ const BookDetails = ({ book }: { book: Book }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <img src="/frog(2).gif" alt="Loading animation" className="w-50 h-50" />
+      <div className="flex justify-center items-center">
+        <img
+          src="/frog(2).gif"
+          alt="Loading animation"
+          className="w-50 h-50 mb-2"
+        />
+        <p className="text-green-700 animate-pulse">Loading...</p>
       </div>
     );
   }
@@ -67,13 +86,16 @@ const BookDetails = ({ book }: { book: Book }) => {
           {typeof book.description === "string"
             ? book.description
             : book.description?.value || "No description found..."}
-          {typeof book.description === "string"
-            ? book.description.length > 100
-              ? `${book.description.substring(0, 100)}...`
-              : book.description
-            : book.description?.value.length > 100
-              ? `${book.description.value.substring(0, 100)}...`
-              : book.description?.value || "No description found..."}
+        </p>
+
+        <p className="font-ravi text-xl text-gray-900 mt-2">
+          Authors:
+          {<br></br>}
+          {authors.length > 0
+            ? authors.map((author, index) => (
+                <span key={author.key || index}> {author.name}</span>
+              ))
+            : " Unknown"}
         </p>
 
         {/* Rating */}
@@ -86,7 +108,7 @@ const BookDetails = ({ book }: { book: Book }) => {
                   ? "text-yellow-500 scale-110"
                   : "text-gray-300"
               } hover:scale-125 hover:text-yellow-400 active:scale-95`}
-              onClick={() => setRating(star)}
+              onClick={() => handleRating(star)}
             />
           ))}
         </div>
