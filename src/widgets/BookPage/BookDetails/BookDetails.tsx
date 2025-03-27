@@ -8,10 +8,14 @@ const BookDetails = ({ book }: { book: Book }) => {
   const [authors, setAuthors] = useState<{ key: string; name: string }[]>([]);
   const [rating, setRating] = useState<number | null>(null);
   const { toggleFavorite, isFavorite } = useFavoritBooks();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchAuthors = async () => {
-      if (!Array.isArray(book.authors)) return;
+      if (!Array.isArray(book.authors)) {
+        setLoading(false); // Stoppa laddningen
+        return;
+      }
 
       const fetchedAuthors = await Promise.all(
         book.authors.map(async (authorWrapper: any) => {
@@ -21,10 +25,19 @@ const BookDetails = ({ book }: { book: Book }) => {
       );
 
       setAuthors(fetchedAuthors);
+      setLoading(false); // Stoppa laddningen när data är laddad
     };
 
     fetchAuthors();
   }, [book.authors]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <img src="/frog(2).gif" alt="Loading animation" className="w-50 h-50" />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col md:flex-row gap-6 bg-white p-6 rounded-lg shadow-lg w-5/6">
