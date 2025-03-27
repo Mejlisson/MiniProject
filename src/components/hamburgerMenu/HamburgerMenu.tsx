@@ -68,10 +68,10 @@ export default function HamburgerMenu() {
                 <ul className="flex flex-col text-white font-ravi">
                   <li
                     // to="/menu/Books"
-                    className="hover:bg-gray-700 p-4"
-                    onClick={() => setIsOpen(false)} // Stänger menyn vid klick
-                  >
-                    Favorite Books
+                    className="hover:bg-gray-700 p-4">
+                    <Link to="/favorites" onClick={() => setIsOpen(false)}> {/*Stänger menyn vid klick*/}
+                      Favorite Books
+                    </Link>
                   </li>
                   <li
                     // to="/menu/Authors"
