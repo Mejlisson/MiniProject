@@ -69,7 +69,7 @@ const BookPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-6 mt-12 bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center p-6 mt-17 bg-gray-100 min-h-screen">
       <BackButton navigate={navigate} />
       <BookDetails book={book} />
       <RelatedBooks books={authorBooks} navigate={navigate} />
