@@ -39,11 +39,11 @@ const BookDetails = ({ book }: { book: Book }) => {
   return (
     <div className="flex flex-col md:flex-row gap-6 bg-white p-6 rounded-lg shadow-lg w-5/6">
       {/* Book Cover + Favorite Button */}
-      <div className="w-40 h-70 flex flex-col items-center relative">
+      <div className="w-50 h-80 flex flex-col items-center relative">
         <button
-          className={`absolute top-2 right-2 text-3xl transition-all duration-300 ease-in-out ${isFavorite(book)
-              ? "text-red-500 hover:scale-110 hover:drop-shadow-md"
-              : "text-gray-300 hover:text-red-400 hover:scale-110 hover:drop-shadow-md"
+          className={`absolute top-0 right-2 text-4xl z-10 transition-all duration-300 ease-in-out ${isFavorite(book)
+            ? "text-red-500 hover:scale-110 hover:drop-shadow-md"
+            : "text-gray-300 hover:text-red-400 hover:scale-140 hover:drop-shadow-md"
             }`}
           onClick={() => toggleFavorite(book)}
         >
@@ -77,8 +77,8 @@ const BookDetails = ({ book }: { book: Book }) => {
             <FaStar
               key={star}
               className={`transition-all duration-300 ease-in-out cursor-pointer ${rating !== null && star <= rating
-                  ? "text-yellow-500 scale-110"
-                  : "text-gray-300"
+                ? "text-yellow-500 scale-110"
+                : "text-gray-300"
                 } hover:scale-125 hover:text-yellow-400 active:scale-95`}
               onClick={() => setRating(star)}
             />
