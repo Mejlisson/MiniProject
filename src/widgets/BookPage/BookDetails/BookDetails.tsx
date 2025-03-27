@@ -1,13 +1,14 @@
 import { FaHeart, FaStar } from "react-icons/fa";
 import { Book, Author } from "../../../types/types";
 import { useState } from "react";
+import { useFavoritBooks } from "../../../hooks/useFavorite";
 
 const BookDetails = ({ book }: { book: Book }) => {
   const [rating, setRating] = useState<number | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { toggleFavorite, isFavorite } = useFavoritBooks();
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 bg-white p6 rounded-lg shadow-lg w-5/6 h-90 ">
+    <div className="flex flex-col md:flex-row gap-6 bg-white p6 rounded-lg shadow-lg w-5/6 h-90">
       {/* Book Cover + Favorite Button */}
       <div className="relative">
         <img
@@ -16,10 +17,9 @@ const BookDetails = ({ book }: { book: Book }) => {
           alt={book.title}
         />
         <button
-          className={`absolute top-2 -right-200  text-3xl ${
-            isFavorite ? "text-red-500" : "text-gray-300"
-          }`}
-          onClick={() => setIsFavorite(!isFavorite)}
+          className={`absolute top-2 -right-200 text-3xl ${isFavorite(book) ? "text-red-500" : "text-gray-300"
+            }`}
+          onClick={() => toggleFavorite(book)}
         >
           <FaHeart />
         </button>
@@ -36,8 +36,8 @@ const BookDetails = ({ book }: { book: Book }) => {
           Authors:
           {book.authors && book.authors.length > 0
             ? book.authors.map((author: Author, index) => (
-                <span key={author.key || index}>{author.name}</span>
-              ))
+              <span key={author.key || index}>{author.name}</span>
+            ))
             : " Unknown"}
         </p>
         {/* Rating */}
