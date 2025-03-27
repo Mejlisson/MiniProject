@@ -7,7 +7,7 @@ import { useFavoritBooks } from "../../../hooks/useFavoritBook";
 const BookDetails = ({ book }: { book: Book }) => {
   const [authors, setAuthors] = useState<{ key: string; name: string }[]>([]);
   const [rating, setRating] = useState<number | null>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { toggleFavorite, isFavorite } = useFavoritBooks();
 
   useEffect(() => {
     const fetchAuthors = async () => {
@@ -17,7 +17,7 @@ const BookDetails = ({ book }: { book: Book }) => {
         book.authors.map(async (authorWrapper: any) => {
           const authorKey = authorWrapper.author?.key;
           return await fetchAuthorDetails(authorKey);
-        }),
+        })
       );
 
       setAuthors(fetchedAuthors);
@@ -26,17 +26,24 @@ const BookDetails = ({ book }: { book: Book }) => {
     fetchAuthors();
   }, [book.authors]);
 
-  if (!book) {
-    return <div>Loading...</div>;
-  }
+  const description =
+    typeof book.description === "string"
+      ? book.description
+      : book.description?.value || "No description found...";
+
+  const shortDescription =
+    description.length > 100
+      ? `${description.substring(0, 100)}...`
+      : description;
+
   return (
     <div className="flex flex-col md:flex-row gap-6 bg-white p-6 rounded-lg shadow-lg w-5/6">
       {/* Book Cover + Favorite Button */}
-      <div className="w-50 h-80 flex flex-col items-center relative">
+      <div className="w-40 h-70 flex flex-col items-center relative">
         <button
-          className={`absolute top-0 right-2 text-4xl z-10 transition-all duration-300 ease-in-out ${isFavorite(book)
+          className={`absolute top-2 right-2 text-3xl transition-all duration-300 ease-in-out ${isFavorite(book)
             ? "text-red-500 hover:scale-110 hover:drop-shadow-md"
-            : "text-gray-300 hover:text-red-400 hover:scale-140 hover:drop-shadow-md"
+            : "text-gray-300 hover:text-red-400 hover:scale-110 hover:drop-shadow-md"
             }`}
           onClick={() => toggleFavorite(book)}
         >
@@ -48,98 +55,38 @@ const BookDetails = ({ book }: { book: Book }) => {
           alt={book.title}
         />
       </div>
-      <div className="flex flex-col md:flex-row gap-6 bg-white p6 rounded-lg shadow-lg w-5/6 h-90">
-        <div className="flex flex-col md:flex-row gap-6 bg-white p-6 rounded-lg shadow-lg w-5/6 ">
-          {/* Book Cover + Favorite Button */}
-          <div className="w-40 h-70 flex flex-col items-center">
-            <div className="w-full flex justify-end">
-              <button
-                className={`text-3xl transition-all duration-300 ease-in-out ${isFavorite ? "text-red-500 hover:scale-110 hover:drop-shadow-md" : "text-gray-300 hover:text-red-400 hover:scale-110 hover:drop-shadow-md"}`}
-                onClick={() => setIsFavorite(!isFavorite)}
-              >
-                <FaHeart />
-              </button>
-            </div>
-            <img
-              src={`https://covers.openlibrary.org/b/id/${book.covers?.[0]}-L.jpg`}
-              className="w-40 max-w-md p-3 h-auto rounded-md shadow-md mt-2"
-              alt={book.title}
+
+      {/* Book Information */}
+      <div className="flex flex-col justify-center">
+        <h1 className="text-2xl font-ravi pl-0.5">{book.title}</h1>
+        <p className="overflow-hidden max-h-[100px] hover:max-h-[500px] transition-all duration-300 ease-in-out">
+          {shortDescription}
+        </p>
+        <p className="font-ravi text-xl text-gray-900 mt-2">
+          Authors:
+          {authors.length > 0
+            ? authors.map((author, index) => (
+              <span key={author.key || index}> {author.name}</span>
+            ))
+            : " Unknown"}
+        </p>
+
+        {/* Rating */}
+        <div className="mt-1 flex text-yellow-400 text-2xl">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <FaStar
+              key={star}
+              className={`transition-all duration-300 ease-in-out cursor-pointer ${rating !== null && star <= rating
+                ? "text-yellow-500 scale-110"
+                : "text-gray-300"
+                } hover:scale-125 hover:text-yellow-400 active:scale-95`}
+              onClick={() => setRating(star)}
             />
-            <button
-              className={`absolute top-2 -right-200 text-3xl ${isFavorite ? "text-red-500" : "text-gray-300"
-                }`}
-              onClick={() => setIsFavorite(!isFavorite)}
-            >
-              <FaHeart />
-            </button>
-          </div>
-
-          {/* Book Information */}
-          <div className="flex flex-col justify-center">
-            <h1 className="text-2xl font-ravi pl-0.5">{book.title}</h1>
-            <p className="overflow-hidden max-h-[100px] hover:max-h-[500px] transition-all duration-300 ease-in-out">
-              {shortDescription}
-            </p>
-            <p className="font-ravi text-xl text-gray-900 mt-2">
-              Authors:
-              {authors.length > 0
-                ? authors.map((author, index) => (
-                  <span key={author.key || index}> {author.name}</span>
-                ))
-                : " Unknown"}
-            </p>
-
-            {/* Rating */}
-            <div className="mt-1 flex text-yellow-400 text-2xl">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <FaStar
-                  key={star}
-                  className={`transition-all duration-300 ease-in-out cursor-pointer ${rating !== null && star <= rating
-                    ? "text-yellow-500 scale-110"
-                    : "text-gray-300"
-                    } hover:scale-125 hover:text-yellow-400 active:scale-95`}
-                  onClick={() => setRating(star)}
-                />
-              ))}
-              {/* Book Information */}
-              <div className="flex flex-col justify-center">
-                <h1 className="text-2xl font-ravi pl-0.5">{book.title}</h1>
-                <p className="overflow-hidden max-h-[100px] hover:max-h-[500px] transition-all duration-300 ease-in-out">
-                  {typeof book.description === "string"
-                    ? book.description
-                    : book.description?.value || "No description found..."}
-                  {typeof book.description === "string"
-                    ? book.description.length > 100
-                      ? `${book.description.substring(0, 100)}...`
-                      : book.description
-                    : book.description?.value.length > 100
-                      ? `${book.description.value.substring(0, 100)}...`
-                      : book.description?.value || "No description found..."}
-                </p>
-                <p className="font-ravi text-xl text-gray-900 mt-2">
-                  Authors:
-                  {book.authors && book.authors.length > 0
-                    ? book.authors.map((author: Author, index) => (
-                      <span key={author.key || index}>{author.name}</span>
-                    ))
-                    : " Unknown"}
-                </p>
-                {/* Rating */}
-                <div className="mt-1 flex text-yellow-400 text-2xl">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <FaStar
-                      key={star}
-                      className={`transition-all duration-300 ease-in-out cursor-pointer
-        ${rating !== null && star <= rating ? "text-yellow-500 scale-110" : "text-gray-300"}
-        hover:scale-125 hover:text-yellow-400 active:scale-95`}
-                      onClick={() => setRating(star)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-          );
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
-          export default BookDetails;
+export default BookDetails;
