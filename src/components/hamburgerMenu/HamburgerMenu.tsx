@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { MenuContext } from "../../context/menuContext";
+import { MenuContext } from "../../context/MenuContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function HamburgerMenu() {
@@ -76,13 +76,14 @@ export default function HamburgerMenu() {
                       Favorite Books
                     </Link>
                   </li>
-                  <li
-                    // to="/menu/Authors"
-                    className="hover:bg-gray-700 p-4"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Favorite Arthor
+
+                  {/*to="/menu/Authors"*/}
+                  <li className="hover:bg-gray-700 p-4">
+                    <Link to="/favorite-authors" onClick={() => setIsOpen(false)}>
+                      Favorite Authors
+                    </Link>
                   </li>
+
                   <Link
                     to="/rating"
                     // to="/menu/Reviews"

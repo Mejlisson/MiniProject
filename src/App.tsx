@@ -8,6 +8,7 @@ import AuthorPage from "./pages/AuthorPage";
 import AboutPage from "./pages/AboutPage";
 import FavoritPage from "./pages/FavoritBookPage";
 import RootLayout from "./layouts/RootLayout";
+import FavoriteAuthorsPage from "./widgets/FavoritAuthor/FavoriteAuthorsPage";
 
 // Context Providers
 import { MenuProvider } from "./context/MenuContext";
@@ -24,6 +25,8 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "book/:bookKey/:bookSlug", element: <BookPage /> },
       { path: "author/:authorKey", element: <AuthorPage /> },
+      { path: "favorite-authors", element: <FavoriteAuthorsPage /> },
+      { path: "author/:authorName", element: <AuthorPage /> },
       { path: "about", element: <AboutPage /> },
       { path: "favorites", element: <FavoritPage /> },
       { path: "rating", element: <RatingPage /> },
