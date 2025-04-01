@@ -4,6 +4,7 @@ import { Book } from "../types/types";
 
 export default function AuthorPage() {
     const { authorName } = useParams();
+    console.log("Author name from URL:", authorName);
     const navigate = useNavigate();
 
     const [books, setBooks] = useState<Book[]>([]);

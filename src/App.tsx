@@ -9,12 +9,12 @@ import AboutPage from "./pages/AboutPage";
 import FavoritPage from "./pages/FavoritBookPage";
 import RootLayout from "./layouts/RootLayout";
 import FavoriteAuthorsPage from "./widgets/FavoritAuthor/FavoriteAuthorsPage";
+import RatingPage from "./pages/RatingPage";
 
 // Context Providers
 import { MenuProvider } from "./context/MenuContext";
 import { FavoriteProvider } from "./widgets/FavoritBook/FavoritBookContext";
 import { RatingProvider } from "./context/RatingContext";
-import RatingPage from "./pages/RatingPage";
 
 // Routing
 const router = createBrowserRouter([
@@ -24,9 +24,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "book/:bookKey/:bookSlug", element: <BookPage /> },
-      { path: "author/:authorKey", element: <AuthorPage /> },
-      { path: "favorite-authors", element: <FavoriteAuthorsPage /> },
       { path: "author/:authorName", element: <AuthorPage /> },
+      { path: "favorite-authors", element: <FavoriteAuthorsPage /> },
       { path: "about", element: <AboutPage /> },
       { path: "favorites", element: <FavoritPage /> },
       { path: "rating", element: <RatingPage /> },
