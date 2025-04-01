@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import HamburgerMenu from "../components/hamburgerMenu/HamburgerMenu"; 
-import Footer from "../components/footer/footer"; 
+import HamburgerMenu from "../components/hamburgerMenu/HamburgerMenu";
+import Footer from "../components/Footer/footer";
 
 const RootLayout = () => {
   const [hasVisitedHome, setHasVisitedHome] = useState(() => {

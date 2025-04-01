@@ -1,4 +1,4 @@
-import CombinedSearch from "../components/search/CombinedSearch";
+import CombinedSearch from "../components/Search/CombinedSearch";
 
 const HomePage = () => {
   return (
